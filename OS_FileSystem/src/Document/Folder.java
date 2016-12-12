@@ -20,9 +20,9 @@ import javax.swing.JTextField;
 public class Folder extends MyDocument
 {
 	FolderViewPanel  folderView=new FolderViewPanel();
-	
+
 	class FolderViewPanel extends JPanel
-	{	
+	{
 		void setViewPanel()
 		{
 			viewPanel.setBackground(Color.white);
@@ -33,7 +33,7 @@ public class Folder extends MyDocument
 			viewPanel.add(imgLabel);
 			add(viewPanel);
 		}
-		
+
 		void setNamePanel()
 		{
 			nameField.setHorizontalAlignment(JTextField.CENTER);
@@ -42,7 +42,7 @@ public class Folder extends MyDocument
 			nameField.setBounds(10, 80, 80, 20);
 			add(nameField);
 		}
-		
+
 		FolderViewPanel()
 		{
 			setBackground(Color.white);
@@ -51,12 +51,12 @@ public class Folder extends MyDocument
 			setViewPanel();
 			setNamePanel();
 		}
-		
+
 		MouseListener viewMouseListener=new MouseListener()
 		{
 
-			public void mouseClicked(MouseEvent e) 
-			{	
+			public void mouseClicked(MouseEvent e)
+			{
 				if (e.getButton()==MouseEvent.BUTTON1 && e.getClickCount()==2)
 				{
 					viewPanel.setBackground(Color.white);
@@ -68,11 +68,11 @@ public class Folder extends MyDocument
 					JMenuItem openMenu=new JMenuItem("打开");
 					openMenu.addActionListener(openMenuListener);
 					menu.add(openMenu);
-					
+
 					JMenuItem resetNameMenu=new JMenuItem("重命名");
 					resetNameMenu.addActionListener(resetNameMenuListener);
 					menu.add(resetNameMenu);
-					
+
 					JMenuItem deleteMenu=new JMenuItem("删除");
 					deleteMenu.addActionListener(deleteMenuListener);
 					menu.add(deleteMenu);
@@ -88,40 +88,40 @@ public class Folder extends MyDocument
 						showMenu.addActionListener(showMenuListener);
 						menu.add(showMenu);
 					}
-					
+
 					JMenuItem propertyMenu=new JMenuItem("属性");
 					propertyMenu.addActionListener(propertyMenuListener);
 					menu.add(propertyMenu);
-					
+
 					menu.show(e.getComponent(),e.getX(),e.getY());
 				}
 			}
 
-			public void mouseEntered(MouseEvent arg0) 
+			public void mouseEntered(MouseEvent arg0)
 			{
 				viewPanel.setBackground(Color.blue);
 			}
 
-			public void mouseExited(MouseEvent arg0) 
+			public void mouseExited(MouseEvent arg0)
 			{
 				viewPanel.setBackground(Color.white);
 			}
 
-			public void mousePressed(MouseEvent arg0) 
+			public void mousePressed(MouseEvent arg0)
 			{
 			}
 
-			public void mouseReleased(MouseEvent e) 
+			public void mouseReleased(MouseEvent e)
 			{
 			}
-			
-			ActionListener openMenuListener = new ActionListener() 
+
+			ActionListener openMenuListener = new ActionListener()
 			{
-				public void actionPerformed(ActionEvent e) 
+				public void actionPerformed(ActionEvent e)
 				{
 					open();
-				}				
-			}; 
+				}
+			};
 			ActionListener hideMenuListener=new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
@@ -129,7 +129,7 @@ public class Folder extends MyDocument
 					hideFolder(true);
 				}
 			};
-			
+
 			ActionListener showMenuListener=new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
@@ -137,7 +137,7 @@ public class Folder extends MyDocument
 					hideFolder(false);
 				}
 			};
-			
+
 			ActionListener resetNameMenuListener=new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
@@ -145,7 +145,7 @@ public class Folder extends MyDocument
 					resetName();
 				}
 			};
-			
+
 			ActionListener deleteMenuListener=new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
@@ -153,7 +153,7 @@ public class Folder extends MyDocument
 					delete(true);
 				}
 			};
-			
+
 			ActionListener propertyMenuListener=new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
@@ -163,14 +163,14 @@ public class Folder extends MyDocument
 			};
 		};
 	}
-	
+
 	public Folder(ContentPanel father)
 	{
 		fatherContentPanel=father;
 		create();
 		contentPanel=new ContentPanel(fatherContentPanel);
 	}
-	
+
 
 
 	public Folder(Block block,ContentPanel father)
@@ -180,8 +180,8 @@ public class Folder extends MyDocument
 		contentPanel=new ContentPanel(fatherContentPanel);
 		getProperty(block);
 		nameField.setText(name);
-		whoAmI="文件夹"; 
-		
+		whoAmI="文件夹";
+
 		if (block.data==null) return ;
 		String str=block.data;
 		while (true)		//文件夹
@@ -203,32 +203,33 @@ public class Folder extends MyDocument
 			new MyFile(Disk.block[blockIndex],this.contentPanel);
 			str=str.substring(index+1);
 		}
-		
+
 	}
-	
-	//打开文件夹
+
+	//打开文件夹啊
 	public void open()
 	{
 		setVisitTime();
 		block.setProperty(this);
 		ContentPanel.switchPanel(contentPanel);
 	}
-	
+
 	///删除文件夹
 	public boolean delete(boolean isRootPanel)
 	{
 		if (isRootPanel)
-		{	
+		{
 			int option = JOptionPane.showConfirmDialog(
-				null, "删除文件？", "是否删除文件", JOptionPane.YES_NO_OPTION,
-				JOptionPane.WARNING_MESSAGE, null);  
+					null, "删除文件？",
+					"是否删除文件", JOptionPane.YES_NO_OPTION,
+					JOptionPane.WARNING_MESSAGE, null);
 			if (option==JOptionPane.NO_OPTION)
 			{
 				return false;
 			}
 		}
 		boolean isDelete=true;
-			
+
 		for (int i=0; i<contentPanel.fileList.size(); i++)
 		{
 			if (!contentPanel.fileList.get(i).delete(false)) isDelete=false;
@@ -239,26 +240,26 @@ public class Folder extends MyDocument
 			if (!contentPanel.folderList.get(i).delete(false)) isDelete=false;
 			else i--;
 		}
-		
+
 		if (isDelete)
 		{
 			Disk.fat.deleteBlock(this);
 			contentPanel.fatherContentPanel.folderList.remove(this);
-			
+
 			Block fatherBlock;
 			if (fatherContentPanel.getFolder()==null) fatherBlock=Disk.block[0];
 			else fatherBlock=fatherContentPanel.getFolder().block;
 			fatherBlock.setData(fatherContentPanel);
-			
+
 			if (isRootPanel)
 			{
 				fatherContentPanel.refresh();
 			}
 		}
-		
+
 		return isDelete;
 	}
-	
+
 	boolean checkName(String str)
 	{
 		for (int i=0; i<fatherContentPanel.folderList.size(); i++)
@@ -267,23 +268,23 @@ public class Folder extends MyDocument
 		}
 		return true;
 	}
-	
+
 	//重命名以后，检查命名是否规范，帮助修改	  参数isAutomic 表示是否为自动取名
-	void resetName(boolean isAutomic)	
+	void resetName(boolean isAutomic)
 	{
 
 		String newName=nameField.getText();
 		while (!newName.isEmpty() && newName.charAt(newName.length()-1)==' ') newName=newName.substring(0, newName.length()-1);
 		while (!newName.isEmpty() && newName.charAt(0)==' ') newName=newName.substring(1);
-		
+
 		if (newName.length()>10) newName=newName.substring(0,10);
-		
+
 		if (newName.length()==0)
 		{
 			nameField.setText(name);
 			return ;
 		}
-		
+
 		if (!checkName(newName))
 		{
 			int i=0;
@@ -294,7 +295,7 @@ public class Folder extends MyDocument
 			}
 			newName=newName+"("+new Integer(i).toString()+')';
 		}
-		
+
 		name=newName;
 		nameField.setText(name);
 		if (!isAutomic)
@@ -302,7 +303,7 @@ public class Folder extends MyDocument
 			setModifiTime();
 			block.setProperty(this);
 		}
-		
+
 		if (contentPanel!=null)
 		{
 			for (int i=0; i<contentPanel.folderList.size(); i++)
@@ -315,23 +316,23 @@ public class Folder extends MyDocument
 			}
 		}
 	}
-	
+
 	///点击重命名 更改nameField状态
-	public void resetName()	
+	public void resetName()
 	{
 		nameField.setEditable(true);
 		nameField.addFocusListener(nameFieldFocusListener);
 		nameField.addActionListener(nameFieldActionListener);
 	}
-	
+
 	public void create()
 	{
 		setCreateTime();
 		whoAmI="文件夹";
 		nameField.setText("新建文件夹");
-		resetName(true);	
+		resetName(true);
 	}
-	
+
 	//隐藏文件夹
 	void hideFolder(boolean hide)
 	{
@@ -339,28 +340,28 @@ public class Folder extends MyDocument
 		fatherContentPanel.refresh();
 		block.setProperty(this);
 	}
-	
+
 	//////获取绝对地址
 	public String getAddress()
 	{
 		return fatherAddress+name+'/';
 	}
-	
+
 	FocusListener nameFieldFocusListener=new FocusListener()
 	{
-		public void focusGained(FocusEvent arg0) 
+		public void focusGained(FocusEvent arg0)
 		{
 		}
-		public void focusLost(FocusEvent e) 
+		public void focusLost(FocusEvent e)
 		{
 			nameField.setEditable(false);
 			resetName(false);
 		}
 	};
-	
+
 	ActionListener nameFieldActionListener=new ActionListener()
 	{
-		public void actionPerformed(ActionEvent arg0) 
+		public void actionPerformed(ActionEvent arg0)
 		{
 			fatherContentPanel.requestFocus();
 		}
