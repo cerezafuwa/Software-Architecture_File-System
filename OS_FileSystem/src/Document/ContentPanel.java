@@ -49,6 +49,10 @@ public class ContentPanel extends JPanel
 	{
 		refreshTime=new Timer();
 		class RefreshTask extends TimerTask
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 		{
 			public void run()
 			{
@@ -72,7 +76,11 @@ public class ContentPanel extends JPanel
 		refreshTime.schedule(new RefreshTask(), 50);
 
 		Folder folder=getFolder();
+<<<<<<< HEAD
 		if (folder==null)	FolderToolBar.getToolBar().setAddress("??Q?/");
+=======
+		if (folder==null)	FolderToolBar.getToolBar().setAddress("我的Q盘/");
+>>>>>>> origin/master
 		else	FolderToolBar.getToolBar().setAddress(folder.getAddress());
 	}
 
@@ -98,7 +106,11 @@ public class ContentPanel extends JPanel
 		Block block=Disk.fat.getBlock();
 		if (block==null)
 		{
+<<<<<<< HEAD
 			JOptionPane.showMessageDialog(null, "???????????");
+=======
+			JOptionPane.showMessageDialog(null, "空间已满，无法新建文件");
+>>>>>>> origin/master
 			return ;
 		}
 
@@ -108,7 +120,11 @@ public class ContentPanel extends JPanel
 
 		Folder fatherFolder=folder.fatherContentPanel.getFolder();
 		if (fatherFolder==null)
+<<<<<<< HEAD
 			folder.setFatherAddress("??Q?/");
+=======
+			folder.setFatherAddress("我的Q盘/");
+>>>>>>> origin/master
 		else
 			folder.setFatherAddress(fatherFolder.getAddress());
 
@@ -124,7 +140,11 @@ public class ContentPanel extends JPanel
 		Block block=Disk.fat.getBlock();
 		if (block==null)
 		{
+<<<<<<< HEAD
 			JOptionPane.showMessageDialog(null, "???????????");
+=======
+			JOptionPane.showMessageDialog(null, "空间已满，无法新建文件");
+>>>>>>> origin/master
 			return ;
 		}
 
@@ -133,7 +153,11 @@ public class ContentPanel extends JPanel
 		fileList.add(file);
 
 		if (file.fatherContentPanel.getFolder()==null)
+<<<<<<< HEAD
 			file.setFatherAddress("??Q?/");
+=======
+			file.setFatherAddress("我的Q盘/");
+>>>>>>> origin/master
 		else
 			file.setFatherAddress(file.fatherContentPanel.getFolder().getAddress());
 
@@ -174,6 +198,7 @@ public class ContentPanel extends JPanel
 			if (e.getButton()==MouseEvent.BUTTON3)
 			{
 				JPopupMenu menu=new JPopupMenu();
+<<<<<<< HEAD
 				JMenuItem refreshMenu=new JMenuItem("??");
 				refreshMenu.addActionListener(refreshMenuListener);
 				menu.add(refreshMenu);
@@ -183,18 +208,37 @@ public class ContentPanel extends JPanel
 				menu.add(newFile);
 
 				JMenuItem newFolder=new JMenuItem("?????");
+=======
+				JMenuItem refreshMenu=new JMenuItem("刷新");
+				refreshMenu.addActionListener(refreshMenuListener);
+				menu.add(refreshMenu);
+
+				JMenuItem newFile=new JMenuItem("新建文件");
+				newFile.addActionListener(newFileMenuListener);
+				menu.add(newFile);
+
+				JMenuItem newFolder=new JMenuItem("新建文件夹");
+>>>>>>> origin/master
 				newFolder.addActionListener(newFolderMenuListener);
 				menu.add(newFolder);
 
 				if (!isShowAll)
 				{
+<<<<<<< HEAD
 					JMenuItem showAll=new JMenuItem("??????");
+=======
+					JMenuItem showAll=new JMenuItem("显示所有文件");
+>>>>>>> origin/master
 					showAll.addActionListener(showAllMenuListener);
 					menu.add(showAll);
 				}
 				else
 				{
+<<<<<<< HEAD
 					JMenuItem hideAll=new JMenuItem("???????");
+=======
+					JMenuItem hideAll=new JMenuItem("不显示隐藏文件");
+>>>>>>> origin/master
 					hideAll.addActionListener(hideAllMenuListener);
 					menu.add(hideAll);
 				}

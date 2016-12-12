@@ -19,12 +19,20 @@ public class Block
 		property=property+"块号:"+new Integer(index).toString()+'\n';
 		property=property+"是否为隐藏文件:"+new Boolean(fcb.isHide).toString();
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> origin/master
 	void setData(String str)
 	{
 		data=str;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> origin/master
 	void setData(ContentPanel content)
 	{
 		data="";
@@ -33,10 +41,19 @@ public class Block
 			data=data+content.folderList.get(i).block.index+'\n';
 		}
 		data=data+"NULL\n";
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> origin/master
 		for (int i=0; i<content.fileList.size(); i++)
 		{
 			data=data+content.fileList.get(i).block.index+'\n';
 		}
 	}
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> origin/master
