@@ -85,6 +85,15 @@ public class Disk
 	{
 		return diskPanel;
 	}
+	//使用单例模式
+	private static Disk disk;
+	public static synchronized Disk getInstance(){
+		if(disk==null){
+			disk = new Disk();
+		}
+		return disk;
+	}
+
 	static class DiskPanel extends JPanel
 	{
 		JPanel diskViewPanel;
@@ -191,7 +200,7 @@ public class Disk
 		mainFrame.setVisible(true);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setLayout(new BorderLayout());
-		mainFrame.add(new FolderToolBar().panel,"North");
+		mainFrame.add(FolderToolBar.getToolBar().panel,"North");
 		mainFrame.add(mainPanel,"Center");
 
 		mainPanel.setLayout(new GridLayout(1,1));

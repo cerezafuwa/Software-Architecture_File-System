@@ -26,17 +26,16 @@ public class FolderToolBar
 	JButton enterAddress;
 
 	JPanel panel;
-	static FolderToolBar folderToolBar;
-
+	//使用单例模式
+	static FolderToolBar folderToolBar=new FolderToolBar();
 	static public FolderToolBar getToolBar()
 	{
 		return folderToolBar;
 	}
-
 	public FolderToolBar()
 	{
 
-		folderToolBar=this;
+		//folderToolBar=this;
 
 		panel=new JPanel();
 		panel.setLayout(new BorderLayout());
