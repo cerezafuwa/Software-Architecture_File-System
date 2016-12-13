@@ -144,12 +144,20 @@ public class ContentPanel extends JPanel
 
 	public boolean delete(MyFile file)
 	{
-		if (fileList.remove(file))
+		Iterator it=fileList.iterator();
+		while(it.hasNext())
+		{
+			if(it.next().equals(file)){
+				it.remove();
+				refresh();
+			}
+		}
+		/*if (fileList.remove(file))
 		{
 			refresh();
 			return true;
-		}
-		else return false;
+		}*/
+		return true;
 	}
 
 	public void addKeyStringDocument(String key,JPanel panel)
