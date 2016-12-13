@@ -138,7 +138,7 @@ public class Disk
 
 			public void mouseEntered(MouseEvent arg0)
 			{
-				diskViewPanel.setBackground(Color.blue);
+				diskViewPanel.setBackground(Color.lightGray);
 			}
 
 			public void mouseExited(MouseEvent arg0)
@@ -215,6 +215,7 @@ public class Disk
 	}
 	static void open()
 	{
+
 		ContentPanel.switchPanel(contentPanel);
 	}
 

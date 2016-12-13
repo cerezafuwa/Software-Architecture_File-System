@@ -127,7 +127,7 @@ public class MyFile extends MyDocument {
             }
 
             public void mouseEntered(MouseEvent arg0) {
-                viewPanel.setBackground(Color.blue);
+                viewPanel.setBackground(Color.lightGray);
             }
 
             public void mouseExited(MouseEvent arg0) {
