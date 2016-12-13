@@ -8,6 +8,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -250,8 +251,8 @@ public class Folder extends MyDocument
 		if (isDelete)
 		{
 			Disk.fat.deleteBlock(this);
-			contentPanel.fatherContentPanel.folderList.remove(this);
-
+			//contentPanel.fatherContentPanel.folderList.remove(this);
+			fatherContentPanel.delete(this);
 			Block fatherBlock;
 			if (fatherContentPanel.getFolder()==null) fatherBlock=Disk.block[0];
 			else fatherBlock=fatherContentPanel.getFolder().block;
