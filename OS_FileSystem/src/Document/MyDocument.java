@@ -8,15 +8,20 @@ import java.util.Date;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextField;
 
-
-
+/**
+ * @author hubeini
+ * 组合模式
+ * MyDocument为一个抽象的父类
+ * 存在MyFile和Folder两个子类，其中Folder存在根目录
+ * 优化了整个文件系统的结构目录，利于新增加的搜索功能
+ *
+ */
 public abstract class  MyDocument
 {
 	JPanel viewPanel=new JPanel();
@@ -25,7 +30,7 @@ public abstract class  MyDocument
 
 	ContentPanel contentPanel;			//文件夹说拥有的面板  文件没有这个属性
 	ContentPanel fatherContentPanel;	//自己说在的面板
-	String whoAmI;
+	String whoAmI;                      //文件或者文件夹
 	String fatherAddress;
 	String name;
 	String createTime;
@@ -35,12 +40,13 @@ public abstract class  MyDocument
 	JFrame propertyFrame;
 	boolean isHide=false;
 
-
+	//文件和文件夹的函数接口
 	public abstract void create();
 	public abstract void resetName();
 	public abstract	boolean delete(boolean isRootPanel);
 	public abstract void open();
 
+	//调用属性的函数
 	public void setFatherAddress(String str)
 	{
 		fatherAddress=str;
@@ -254,7 +260,8 @@ public abstract class  MyDocument
 
 		begin=str.indexOf("是否为隐藏文件:");
 		str=str.substring(begin+8);
-		if (str.equals("false"))	isHide=false;
+		if (str.equals("false"))
+			isHide=false;
 		else isHide=true;
 	}
 

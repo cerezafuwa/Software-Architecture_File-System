@@ -91,9 +91,9 @@ public class FolderToolBar
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			if (ContentPanel.getRunningPanel()==null || ContentPanel.getRunningPanel().fatherContentPanel==null)	//在我的q盘下或者在我的q盘的第一集目录
+			if (ContentPanel.getRunningPanel()==null || ContentPanel.getRunningPanel().fatherContentPanel==null)
 			{
-				setAddress("我的Q盘");
+				setAddress("福娃的磁盘");
 				ContentPanel.switchPanel(Disk.getDiskPanel());
 				return ;
 			}
@@ -144,9 +144,9 @@ public class FolderToolBar
 			while (!str.isEmpty() && str.charAt(0)==' ') str=str.substring(1);
 			if (str.length()<=4)
 			{
-				if (str.equals("我的Q盘"))
+				if (str.equals("福娃的磁盘"))
 				{
-					setAddress("我的Q盘");
+					setAddress("福娃的磁盘");
 					ContentPanel.switchPanel(Disk.getDiskPanel());
 				}
 				else
@@ -156,7 +156,7 @@ public class FolderToolBar
 				return ;
 			}
 
-			if (!str.substring(0, 5).equals("我的Q盘/"))
+			if (!str.substring(0, 5).equals("福娃的磁盘/"))
 			{
 				warningErrorAddress();
 				return ;

@@ -6,21 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.Vector;
+import java.util.*;
 
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-
 import Document.Disk.DiskPanel;
+
 
 public class ContentPanel extends JPanel
 {
-	Vector<Folder> folderList;
-	Vector<MyFile> fileList;
+	List<Folder> folderList;
+	List<MyFile> fileList;
 	ContentPanel fatherContentPanel;
 	static boolean isShowAll=false;
 	static ContentPanel runningPanel=null;
@@ -31,8 +29,8 @@ public class ContentPanel extends JPanel
 		setBackground(Color.white);
 		setLayout(new FlowLayout(FlowLayout.LEFT));
 		addMouseListener(contentMouseListener);
-		folderList=new Vector();
-		fileList=new Vector();
+		folderList=new ArrayList<Folder>();
+		fileList=new ArrayList<MyFile>();
 
 	}
 
@@ -49,10 +47,6 @@ public class ContentPanel extends JPanel
 	{
 		refreshTime=new Timer();
 		class RefreshTask extends TimerTask
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 		{
 			public void run()
 			{
@@ -60,13 +54,13 @@ public class ContentPanel extends JPanel
 				{
 					if (isShowAll || !folderList.get(i).isHide)	add(folderList.get(i).folderView);
 				}
+
 				for (int i=0; i<fileList.size(); i++)
 				{
 					if (isShowAll || !fileList.get(i).isHide)	add(fileList.get(i).fileView);
 				}
 				repaint();
 				updateUI();
-
 				deleteTime();
 			}
 		}
@@ -76,11 +70,7 @@ public class ContentPanel extends JPanel
 		refreshTime.schedule(new RefreshTask(), 50);
 
 		Folder folder=getFolder();
-<<<<<<< HEAD
-		if (folder==null)	FolderToolBar.getToolBar().setAddress("??Q?/");
-=======
-		if (folder==null)	FolderToolBar.getToolBar().setAddress("我的Q盘/");
->>>>>>> origin/master
+		if (folder==null)	FolderToolBar.getToolBar().setAddress("福娃的磁盘/");
 		else	FolderToolBar.getToolBar().setAddress(folder.getAddress());
 	}
 
@@ -106,11 +96,7 @@ public class ContentPanel extends JPanel
 		Block block=Disk.fat.getBlock();
 		if (block==null)
 		{
-<<<<<<< HEAD
-			JOptionPane.showMessageDialog(null, "???????????");
-=======
 			JOptionPane.showMessageDialog(null, "空间已满，无法新建文件");
->>>>>>> origin/master
 			return ;
 		}
 
@@ -120,11 +106,7 @@ public class ContentPanel extends JPanel
 
 		Folder fatherFolder=folder.fatherContentPanel.getFolder();
 		if (fatherFolder==null)
-<<<<<<< HEAD
-			folder.setFatherAddress("??Q?/");
-=======
-			folder.setFatherAddress("我的Q盘/");
->>>>>>> origin/master
+			folder.setFatherAddress("福娃的磁盘/");
 		else
 			folder.setFatherAddress(fatherFolder.getAddress());
 
@@ -140,11 +122,7 @@ public class ContentPanel extends JPanel
 		Block block=Disk.fat.getBlock();
 		if (block==null)
 		{
-<<<<<<< HEAD
-			JOptionPane.showMessageDialog(null, "???????????");
-=======
 			JOptionPane.showMessageDialog(null, "空间已满，无法新建文件");
->>>>>>> origin/master
 			return ;
 		}
 
@@ -153,11 +131,7 @@ public class ContentPanel extends JPanel
 		fileList.add(file);
 
 		if (file.fatherContentPanel.getFolder()==null)
-<<<<<<< HEAD
-			file.setFatherAddress("??Q?/");
-=======
-			file.setFatherAddress("我的Q盘/");
->>>>>>> origin/master
+			file.setFatherAddress("福娃的磁盘/");
 		else
 			file.setFatherAddress(file.fatherContentPanel.getFolder().getAddress());
 
@@ -198,17 +172,6 @@ public class ContentPanel extends JPanel
 			if (e.getButton()==MouseEvent.BUTTON3)
 			{
 				JPopupMenu menu=new JPopupMenu();
-<<<<<<< HEAD
-				JMenuItem refreshMenu=new JMenuItem("??");
-				refreshMenu.addActionListener(refreshMenuListener);
-				menu.add(refreshMenu);
-
-				JMenuItem newFile=new JMenuItem("????");
-				newFile.addActionListener(newFileMenuListener);
-				menu.add(newFile);
-
-				JMenuItem newFolder=new JMenuItem("?????");
-=======
 				JMenuItem refreshMenu=new JMenuItem("刷新");
 				refreshMenu.addActionListener(refreshMenuListener);
 				menu.add(refreshMenu);
@@ -218,33 +181,31 @@ public class ContentPanel extends JPanel
 				menu.add(newFile);
 
 				JMenuItem newFolder=new JMenuItem("新建文件夹");
->>>>>>> origin/master
 				newFolder.addActionListener(newFolderMenuListener);
 				menu.add(newFolder);
 
+				/*
+				JMenuItem newUndo = new JMenuItem("撤销");
+				newUndo.addActionListener(newUndoMenuListener);
+				menu.add(newUndo);
+				*/
+
 				if (!isShowAll)
 				{
-<<<<<<< HEAD
-					JMenuItem showAll=new JMenuItem("??????");
-=======
 					JMenuItem showAll=new JMenuItem("显示所有文件");
->>>>>>> origin/master
 					showAll.addActionListener(showAllMenuListener);
 					menu.add(showAll);
 				}
 				else
 				{
-<<<<<<< HEAD
-					JMenuItem hideAll=new JMenuItem("???????");
-=======
 					JMenuItem hideAll=new JMenuItem("不显示隐藏文件");
->>>>>>> origin/master
 					hideAll.addActionListener(hideAllMenuListener);
 					menu.add(hideAll);
 				}
 				menu.show(e.getComponent(),e.getX(),e.getY());
 			}
 		}
+
 		public void mouseEntered(MouseEvent arg0) {}
 		public void mouseExited(MouseEvent arg0) {}
 		public void mousePressed(MouseEvent arg0) {}
@@ -289,6 +250,14 @@ public class ContentPanel extends JPanel
 			{
 				isShowAll=false;
 				refresh();
+			}
+		};
+
+		///////////撤销的函数，还没加
+		ActionListener newUndoMenuListener=new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
 			}
 		};
 	};

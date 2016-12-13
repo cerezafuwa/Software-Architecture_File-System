@@ -70,7 +70,7 @@ public class Disk
 
 	static JFrame mainFrame;
 	static JPanel mainPanel;
-	static JLabel diskName=new JLabel("我的Q盘",JLabel.CENTER);
+	static JLabel diskName=new JLabel("福娃的磁盘",JLabel.CENTER);
 	static DiskPanel diskPanel;
 	static ContentPanel contentPanel;
 	static Fat fat=new Fat();
@@ -203,7 +203,7 @@ public class Disk
 		mainFrame.setSize(700,600);
 		mainFrame.setLocationRelativeTo(null);
 
-		FolderToolBar.getToolBar().setAddress("我的Q盘");
+		FolderToolBar.getToolBar().setAddress("福娃的磁盘");
 
 		if (new File("SystemFile.bin").exists())	openFile();
 		else
@@ -241,7 +241,7 @@ public class Disk
 
 		if (isDelete)
 		{
-			FolderToolBar.getToolBar().setAddress("我的Q盘");
+			FolderToolBar.getToolBar().setAddress("福娃的磁盘");
 			JOptionPane.showMessageDialog(null, "格式化成功！");
 		}
 	}

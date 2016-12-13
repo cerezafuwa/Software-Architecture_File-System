@@ -17,6 +17,14 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 
+/**
+ * @author hubeini
+ * 组合模式
+ * Folder为Document的子类【枝节点/子部件】
+ * 实现有关文件夹的操作
+ *
+ */
+
 public class Folder extends MyDocument
 {
 	FolderViewPanel  folderView=new FolderViewPanel();
@@ -170,8 +178,6 @@ public class Folder extends MyDocument
 		create();
 		contentPanel=new ContentPanel(fatherContentPanel);
 	}
-
-
 
 	public Folder(Block block,ContentPanel father)
 	{
