@@ -31,9 +31,10 @@ import javax.swing.JTextField;
 
 /**
  * @author hubeini
- *         组合模式
- *         MyFile为Document的子类【叶子节点】
- *         实现有关文件的操作
+ * 组合模式
+ * MyFile为Document的子类【叶子节点】
+ * 实现有关文件的操作
+ *
  */
 
 public class MyFile extends MyDocument {
@@ -104,15 +105,6 @@ public class MyFile extends MyDocument {
                     JMenuItem resetNameMenu = new JMenuItem("重命名");
                     resetNameMenu.addActionListener(resetNameMenuListener);
                     menu.add(resetNameMenu);
-                    if (!isHide) {
-                        JMenuItem hideMenu = new JMenuItem("隐藏文件");
-                        hideMenu.addActionListener(hideMenuListener);
-                        menu.add(hideMenu);
-                    } else {
-                        JMenuItem showMenu = new JMenuItem("显示文件");
-                        showMenu.addActionListener(showMenuListener);
-                        menu.add(showMenu);
-                    }
 
                     JMenuItem propertyMenu = new JMenuItem("属性");
                     propertyMenu.addActionListener(propertyMenuListener);
@@ -189,8 +181,11 @@ public class MyFile extends MyDocument {
             file.add(exit);
             file.add(save);
 
+            /**
+             * 命令模式
+             * 实现对文本的撤销和重做
+             */
             //撤销和重做
-
             JMenu edit = new JMenu("编辑");
             undo=new UndoCommand(textArea);
             undo.addActionListener(undoButtonListener);
@@ -471,7 +466,8 @@ public class MyFile extends MyDocument {
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			textArea.setText(bufferString.get(--bufferIndex));
+
+            textArea.setText(bufferString.get(--bufferIndex));
 			if (bufferIndex!=0) undo.setEnabled(true);
 			else undo.setEnabled(false);
 			if (bufferIndex!=bufferString.size()-1) redo.setEnabled(true);

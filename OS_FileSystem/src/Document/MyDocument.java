@@ -83,7 +83,7 @@ public abstract class  MyDocument
 	{
 		propertyFrame=new JFrame();
 		propertyFrame.setTitle(name+"属性");
-		propertyFrame.setSize(320, 450);
+		propertyFrame.setSize(320, 400);
 		propertyFrame.setResizable(false);
 		propertyFrame.setVisible(true);
 		propertyFrame.setLocationRelativeTo(Disk.mainFrame);
@@ -176,10 +176,6 @@ public abstract class  MyDocument
 		time3.setBounds(100, 330, 200, 20);
 		panel.add(time3);
 
-		JLabel hideLabel=new JLabel("属性:",JLabel.LEFT);
-		hideLabel.setBounds(20, 370, 50, 20);
-		panel.add(hideLabel);
-
 		ActionListener noHide=new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -198,26 +194,6 @@ public abstract class  MyDocument
 				fatherContentPanel.refresh();
 			}
 		};
-
-		ButtonGroup hideProperty=new  ButtonGroup();
-		JRadioButtonMenuItem hide=new JRadioButtonMenuItem("隐藏");
-		hide.setBorderPainted(false);
-		hide.addActionListener(yesHide);
-		hide.setBackground(Color.white);
-		hide.setBounds(100, 370, 50, 20);
-		panel.add(hide);
-
-		JRadioButtonMenuItem see=new JRadioButtonMenuItem("可见");
-		see.setBorderPainted(false);
-		see.addActionListener(noHide);
-		see.setBackground(Color.white);
-		see.setBounds(150, 370, 50, 20);
-		panel.add(see);
-
-		if (isHide) hide.setSelected(true);
-		else see.setSelected(true);
-		hideProperty.add(see);
-		hideProperty.add(hide);
 	}
 
 	public void getProperty(Block block)
@@ -257,12 +233,6 @@ public abstract class  MyDocument
 		end=str.indexOf('\n');
 		modifiTime=str.substring(0,end);
 		str=str.substring(end+1);
-
-		begin=str.indexOf("是否为隐藏文件:");
-		str=str.substring(begin+8);
-		if (str.equals("false"))
-			isHide=false;
-		else isHide=true;
 	}
 
 }

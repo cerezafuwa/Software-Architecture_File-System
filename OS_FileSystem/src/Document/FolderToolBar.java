@@ -26,16 +26,18 @@ public class FolderToolBar
 	JButton enterAddress;
 
 	JPanel panel;
-	//使用单例模式
-	static FolderToolBar folderToolBar=new FolderToolBar();
+	static FolderToolBar folderToolBar;
+
 	static public FolderToolBar getToolBar()
 	{
+
 		return folderToolBar;
 	}
+
 	public FolderToolBar()
 	{
 
-		//folderToolBar=this;
+		folderToolBar=this;
 
 		panel=new JPanel();
 		panel.setLayout(new BorderLayout());
@@ -119,7 +121,8 @@ public class FolderToolBar
 
 
 			ContentPanel contentPanel=ContentPanel.getRunningPanel();
-			if (contentPanel==null) contentPanel=Disk.contentPanel;
+			if (contentPanel==null)
+				contentPanel=Disk.contentPanel;
 			contentPanel.addKeyStringDocument(str,panel);
 
 			panel.setBackground(Color.white);
@@ -141,7 +144,7 @@ public class FolderToolBar
 			String str=addressField.getText();
 			while (!str.isEmpty() && str.charAt(str.length()-1)==' ') str=str.substring(0, str.length()-1);
 			while (!str.isEmpty() && str.charAt(0)==' ') str=str.substring(1);
-			if (str.length()<=4)
+			if (str.length()<=5)
 			{
 				if (str.equals("福娃的磁盘"))
 				{
@@ -155,12 +158,12 @@ public class FolderToolBar
 				return ;
 			}
 
-			if (!str.substring(0, 5).equals("福娃的磁盘/"))
+			if (!str.substring(0, 6).equals("福娃的磁盘/"))
 			{
 				warningErrorAddress();
 				return ;
 			}
-			str=str.substring(5);
+			str=str.substring(6);
 			ContentPanel contentPanel=Disk.contentPanel;
 
 			boolean isFind;

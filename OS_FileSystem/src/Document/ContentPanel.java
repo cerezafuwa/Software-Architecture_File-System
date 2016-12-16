@@ -70,8 +70,10 @@ public class ContentPanel extends JPanel
 		refreshTime.schedule(new RefreshTask(), 50);
 
 		Folder folder=getFolder();
-		if (folder==null)	FolderToolBar.getToolBar().setAddress("福娃的磁盘/");
-		else	FolderToolBar.getToolBar().setAddress(folder.getAddress());
+		if (folder==null)
+			FolderToolBar.getToolBar().setAddress("福娃的磁盘/");
+		else
+			FolderToolBar.getToolBar().setAddress(folder.getAddress());
 	}
 
 	public Folder getFolder()
@@ -144,9 +146,8 @@ public class ContentPanel extends JPanel
 
 	public boolean delete(MyFile file)
 	{
-		Iterator it=fileList.iterator();
-		while(it.hasNext())
-		{
+		Iterator it = fileList.iterator();
+		while(it.hasNext()){
 			if(it.next().equals(file)){
 				it.remove();
 				refresh();
@@ -155,18 +156,6 @@ public class ContentPanel extends JPanel
 		return true;
 	}
 
-	public boolean delete(Folder folder)
-	{
-		Iterator folderIt=folderList.iterator();
-		while(folderIt.hasNext())
-		{
-			if(folderIt.next().equals(folder)){
-				folderIt.remove();
-			}
-		}
-		return true;
-
-	}
 
 	public void addKeyStringDocument(String key,JPanel panel)
 	{

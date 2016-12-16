@@ -8,7 +8,6 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -85,18 +84,6 @@ public class Folder extends MyDocument
 					JMenuItem deleteMenu=new JMenuItem("删除");
 					deleteMenu.addActionListener(deleteMenuListener);
 					menu.add(deleteMenu);
-					if (!isHide)
-					{
-						JMenuItem hideMenu=new JMenuItem("隐藏文件");
-						hideMenu.addActionListener(hideMenuListener);
-						menu.add(hideMenu);
-					}
-					else
-					{
-						JMenuItem showMenu=new JMenuItem("显示文件");
-						showMenu.addActionListener(showMenuListener);
-						menu.add(showMenu);
-					}
 
 					JMenuItem propertyMenu=new JMenuItem("属性");
 					propertyMenu.addActionListener(propertyMenuListener);
@@ -251,8 +238,8 @@ public class Folder extends MyDocument
 		if (isDelete)
 		{
 			Disk.fat.deleteBlock(this);
-			//contentPanel.fatherContentPanel.folderList.remove(this);
-			fatherContentPanel.delete(this);
+			contentPanel.fatherContentPanel.folderList.remove(this);
+
 			Block fatherBlock;
 			if (fatherContentPanel.getFolder()==null) fatherBlock=Disk.block[0];
 			else fatherBlock=fatherContentPanel.getFolder().block;
@@ -267,6 +254,13 @@ public class Folder extends MyDocument
 		return isDelete;
 	}
 
+	public void create()
+	{
+		setCreateTime();
+		whoAmI="文件夹";
+		nameField.setText("新建文件夹");
+		resetName(true);
+	}
 	boolean checkName(String str)
 	{
 		for (int i=0; i<fatherContentPanel.folderList.size(); i++)
@@ -332,13 +326,7 @@ public class Folder extends MyDocument
 		nameField.addActionListener(nameFieldActionListener);
 	}
 
-	public void create()
-	{
-		setCreateTime();
-		whoAmI="文件夹";
-		nameField.setText("新建文件夹");
-		resetName(true);
-	}
+
 
 	//隐藏文件夹
 	void hideFolder(boolean hide)
